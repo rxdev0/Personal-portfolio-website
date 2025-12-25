@@ -1,0 +1,133 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation:
+      - generic:
+        - complementary:
+          - generic:
+            - generic: Menu
+            - button "Close menu":
+              - img
+          - navigation:
+            - list:
+              - listitem:
+                - link "Home-ish":
+                  - /url: "#hero"
+              - listitem:
+                - link "Work":
+                  - /url: "#projects"
+              - listitem:
+                - link "About":
+                  - /url: "#about"
+          - generic:
+            - button "Let's talk shit"
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - switch "Switch to corporate mode" [ref=e6]:
+          - generic [ref=e7]: Real
+          - generic [ref=e10]: Corporate
+        - heading "I build things your CFO will actually understand" [level=1] [ref=e11]
+        - paragraph [ref=e12]: Scalable code, Fast Delivery, clean UI, and a bit of AI where it actually matters. No filler, no fluff.
+        - generic [ref=e13]:
+          - link "Scroll for work" [ref=e14] [cursor=pointer]:
+            - /url: "#projects"
+          - link "LinkedIn, if you must LinkedIn, if you must" [ref=e15] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/yayinkuthiala/
+            - generic [ref=e16]: LinkedIn, if you must
+            - generic: LinkedIn, if you must
+      - generic [ref=e19]:
+        - button "Close card" [ref=e20]:
+          - img [ref=e21]
+        - generic [ref=e24]:
+          - generic [ref=e25]: New build
+          - 'heading "Flux: AI driven" [level=3] [ref=e26]'
+        - paragraph [ref=e27]: Music discovery platform for artists & listeners, shipped as a real product.
+        - generic [ref=e30]: Live now
+    - generic [ref=e35]:
+      - 'heading "Flux: AI powered discovery tool" [level=2] [ref=e36]':
+        - text: "Flux: AI"
+        - text: powered
+        - text: discovery tool
+      - generic [ref=e37]:
+        - paragraph [ref=e38]: Music discovery platform for artists & listeners, shipped as a real product.
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - paragraph [ref=e41]: Role
+            - paragraph [ref=e42]: Founder & Dev
+          - generic [ref=e43]:
+            - paragraph [ref=e44]: Date
+            - paragraph [ref=e45]: December 2025
+        - link "View project" [ref=e47] [cursor=pointer]:
+          - /url: https://fluxbeats.vercel.app
+          - generic [ref=e48]: View project
+          - img [ref=e49]
+    - generic [ref=e68]:
+      - generic:
+        - generic: CREATION INNOVATION BUILDING
+      - generic [ref=e70]:
+        - heading "About Me" [level=2] [ref=e71]
+        - paragraph [ref=e72]: I'm exploring the boundaries of Full-Stack Development, UI/UX, and Cybersecurity.
+        - paragraph [ref=e73]: Currently, I'm focused on building Flux and refining my craft as a founder. Driven by curiosity and a relentless drive for continuous improvement.
+        - paragraph [ref=e75]:
+          - text: I’m 13 — and I build products that
+          - generic [ref=e76]: ship
+          - text: .
+    - generic [ref=e78]:
+      - heading "The Toolkit" [level=2] [ref=e79]
+      - generic [ref=e80]:
+        - generic [ref=e81]:
+          - heading "Frontend" [level=3] [ref=e82]
+          - generic [ref=e83]:
+            - generic [ref=e86]: HTML
+            - generic [ref=e89]: CSS
+            - generic [ref=e92]: JavaScript
+            - generic [ref=e95]: React
+            - generic [ref=e98]: Next.js
+            - generic [ref=e101]: Tailwind CSS
+        - generic [ref=e102]:
+          - heading "Backend" [level=3] [ref=e103]
+          - generic [ref=e104]:
+            - generic [ref=e107]: Node.js
+            - generic [ref=e110]: TypeScript
+            - generic [ref=e113]: Prisma
+        - generic [ref=e114]:
+          - heading "Database" [level=3] [ref=e115]
+          - generic [ref=e119]: PostgreSQL
+        - generic [ref=e120]:
+          - heading "Others" [level=3] [ref=e121]
+          - generic [ref=e122]:
+            - generic [ref=e125]: Python
+            - generic [ref=e128]: Edge AI
+            - generic [ref=e131]: Cybersecurity
+            - generic [ref=e134]: Figma
+    - generic [ref=e136]:
+      - heading "Journey" [level=2] [ref=e137]
+      - generic [ref=e140]:
+        - generic [ref=e143]:
+          - generic [ref=e144]:
+            - heading "Founder & Lead Developer" [level=3] [ref=e145]
+            - generic [ref=e146]: 2025 - Present
+          - heading "Flux" [level=4] [ref=e147]
+          - paragraph [ref=e148]: Founded and built Flux, a music discovery platform solving fragmentation in the industry. Led the full-stack development using Next.js, Prisma, and PostgreSQL. Manage product roadmap, design, and deployment.
+          - generic [ref=e149]: Founder of Flux
+        - generic [ref=e152]:
+          - heading "Freelance / Open Source" [level=3] [ref=e153]
+          - paragraph [ref=e154]: Focused on minimal design and high-performance applications. Working on various UI/UX concepts and open source contributions. Always building.
+    - generic [ref=e155]:
+      - generic [ref=e156]:
+        - heading "Working on something that" [level=2] [ref=e157]
+        - heading "demands high standards?" [level=2] [ref=e158]
+        - button "Holla at me" [ref=e159]
+      - generic:
+        - paragraph: I don't care about © 2012-2025
+        - paragraph: Privacy policy, Cache & shit
+      - generic:
+        - generic:
+          - img
+        - text: Email's Copied, hit me up
+  - button "Open Next.js Dev Tools" [ref=e165] [cursor=pointer]:
+    - img [ref=e166]
+  - alert [ref=e169]
+```
