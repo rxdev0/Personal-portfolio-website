@@ -1,15 +1,15 @@
-import { PrismaClient } from '@prisma/client';
+// Prisma is disabled for now to avoid requiring a database in production builds.
+// This stub keeps the rest of the code compiling without actually connecting to a DB.
 
-const prismaClientSingleton = () => {
-    return new PrismaClient();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const prisma: any = {
+    message: {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        async create(_args: any) {
+            // No-op in production/demo mode.
+            return Promise.resolve();
+        },
+    },
 };
 
-declare global {
-    var prismaGlobal: undefined | ReturnType<typeof prismaClientSingleton>;
-}
-
-const prisma = globalThis.prismaGlobal ?? prismaClientSingleton();
-
 export default prisma;
-
-if (process.env.NODE_ENV !== 'production') globalThis.prismaGlobal = prisma;
