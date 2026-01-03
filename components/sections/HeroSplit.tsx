@@ -28,7 +28,7 @@ export default function HeroSplit({ isCorporate, toggleCorporate }: HeroSplitPro
   const floatingY2 = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
 
   return (
-    <section      id="hero"      ref={containerRef}
+    <section id="hero" ref={containerRef}
       className="relative flex min-h-screen w-full overflow-hidden flex-col md:flex-row"
     >
       <SocialDock />
@@ -96,7 +96,7 @@ export default function HeroSplit({ isCorporate, toggleCorporate }: HeroSplitPro
           className="text-base md:text-lg text-gray-600 max-w-xl mb-12 leading-relaxed"
         >
           {isCorporate ? (
-            "I build scalable, user focused experiences that solve real problems."
+            "I craft scalable, user-first experiences that tackle real problems, mixing smart full-stack dev, clean UI/UX, and solid security for seamless impact."
           ) : (
             "Scalable code, Fast Delivery, clean UI, and a bit of AI where it actually matters. No filler, no fluff."
           )}
@@ -121,14 +121,9 @@ export default function HeroSplit({ isCorporate, toggleCorporate }: HeroSplitPro
             href="https://www.linkedin.com/in/yayinkuthiala/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative inline-block text-purple-600 text-sm transition-colors hover:text-purple-700 whitespace-nowrap"
-            style={{ willChange: 'transform, opacity' }}
+            className="group relative inline-flex items-center justify-center px-8 py-4 rounded-full font-medium transition-all duration-300 border border-transparent hover:text-[#7b2cbf] hover:border-[#7b2cbf] text-[#7b2cbf]"
           >
-            {/* Crossfade technique: normal text fades out while bold text fades in for a smooth weight transition */}
-            <span className="inline-block transition-all duration-1000 ease-out transform group-hover:scale-105 group-hover:opacity-0 whitespace-nowrap">
-              {isCorporate ? "Connect professionally" : "LinkedIn, if you must"}
-            </span>
-            <span className="absolute left-0 top-0 inline-block font-bold opacity-0 transition-opacity duration-1000 ease-in transform group-hover:scale-105 group-hover:opacity-100 pointer-events-none whitespace-nowrap">
+            <span className="relative z-10 whitespace-nowrap">
               {isCorporate ? "Connect professionally" : "LinkedIn, if you must"}
             </span>
           </a>
@@ -145,15 +140,15 @@ export default function HeroSplit({ isCorporate, toggleCorporate }: HeroSplitPro
           // Increase the element height on small screens so parallax never exposes the container background
           className="absolute inset-0 bg-cover bg-center h-[160%] md:h-[120%]"
           style={{
-              // Use the public/ asset path so Next serves the image correctly
-              backgroundImage: `url('/heroimg.png')`,
-              // Show the same image regardless of toggle state
-              opacity: 1,
-              mixBlendMode: 'normal',
-              y: backgroundY,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover'
-            }}
+            // Use the public/ asset path so Next serves the image correctly
+            backgroundImage: `url('/heroimg.png')`,
+            // Show the same image regardless of toggle state
+            opacity: 1,
+            mixBlendMode: 'normal',
+            y: backgroundY,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover'
+          }}
         />
 
 
@@ -165,24 +160,24 @@ export default function HeroSplit({ isCorporate, toggleCorporate }: HeroSplitPro
               animate={{ opacity: 1, x: 0, y: 0 }}
               exit={{ opacity: 0, x: 20 }}
               transition={{ delay: 0.4 }}
-              className="fixed bottom-8 right-8 md:bottom-12 md:right-12 bg-white rounded-xl p-6 max-w-xs shadow-2xl z-100"
+              className="fixed bottom-8 right-8 md:bottom-12 md:right-12 bg-white/5 backdrop-blur-md rounded-xl p-6 max-w-xs shadow-[0_0_30px_-5px_rgba(124,58,237,0.3)] z-100 border border-white/10"
             >
               <button
                 onClick={() => setShowCard(false)}
-                className="absolute -top-2 -right-2 w-6 h-6 bg-black text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg z-10"
+                className="absolute -top-2 -right-2 w-6 h-6 bg-white/10 text-white rounded-full flex items-center justify-center hover:scale-110 hover:bg-white/20 transition-all shadow-lg z-10"
                 aria-label="Close card"
               >
                 <X size={14} />
               </button>
               <div className="flex justify-between items-start mb-3">
-                <span className="text-xs font-bold text-red-500 border border-red-200 bg-red-50 rounded-full px-3 py-1">
+                <span className="text-xs font-bold text-red-400 border border-red-500/20 bg-red-500/10 rounded-full px-3 py-1">
                   New build
                 </span>
-                <h3 className="font-bold text-black text-lg leading-tight ml-2">
+                <h3 className="font-bold text-white text-lg leading-tight ml-2">
                   Flux: AI driven
                 </h3>
               </div>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-400 text-sm">
                 Music discovery platform for artists & listeners, shipped as a real product.
               </p>
               <div className="mt-4 flex gap-2">

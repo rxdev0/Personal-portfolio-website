@@ -47,9 +47,14 @@ export function About() {
                         Driven by curiosity and a relentless drive for continuous improvement.
                     </p>
 
-                    <div className="inline-block px-10 py-5 rounded-3xl bg-white/5 border border-white/10 hover:border-accent/40 transition-colors group">
-                        <p className="text-xl font-medium text-foreground">
-                            I’m 13 — and I build products that <span className="text-accent group-hover:scale-110 inline-block transition-transform">ship</span>.
+                    <div className="inline-block px-6 md:px-10 py-5 rounded-3xl bg-white/5 border border-white/10 hover:border-accent/40 transition-colors group">
+                        <p className="text-lg md:text-xl font-medium text-foreground">
+                            I’m 13 — and I build products that <span className="inline-block whitespace-nowrap">
+                                <span className="relative inline-block cursor-default">
+                                    <span className="relative z-10 text-accent transition-colors duration-300">ship</span>
+                                    <span className="absolute inset-0 bg-accent/50 blur-md rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-0" />
+                                </span>.
+                            </span>
                         </p>
                     </div>
                 </motion.div>

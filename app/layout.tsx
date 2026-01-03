@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   title: "Yayin Kuthiala | 13 y/o Founder",
   description: "I’m a 13-year-old student building real products like Flux. Exploring full-stack development, UI/UX, cybersecurity, and entrepreneurship.",
   icons: {
-    icon: "/logo.png",
+    icon: "/favicon-y.png",
   },
 };
 
@@ -33,9 +33,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased`}
+        suppressHydrationWarning
       >
         <MouseFollower />
         {children}

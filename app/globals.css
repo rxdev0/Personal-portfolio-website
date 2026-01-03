@@ -26,6 +26,13 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   overflow-x: hidden;
+  cursor: none !important;
+  /* Hide default cursor */
+}
+
+/* Ensure no element shows the default cursor */
+* {
+  cursor: none !important;
 }
 
 /* Utilities for smooth scrolling if needed, though Next usually handles it */

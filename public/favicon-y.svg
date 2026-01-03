@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Black background -->
+  <rect width="200" height="200" fill="#000000"/>
+  
+  <!-- Main Y shape - Black fill with white outline -->
+  <g stroke="#FFFFFF" stroke-width="2" fill="#000000" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Left arm - single curved line -->
+    <path d="M 40 25 Q 50 15 60 25 L 65 30 Q 70 35 75 45 L 80 95 Q 82 105 85 115 L 90 135" />
+    
+    <!-- Right arm - three parallel lines creating layered effect -->
+    <!-- Outer (thickest) -->
+    <path d="M 160 25 Q 150 15 140 25 L 135 30 Q 130 35 125 45 L 120 95 Q 118 105 115 115 L 110 135" stroke-width="3.5"/>
+    
+    <!-- Middle -->
+    <path d="M 155 27 Q 147 19 142 27 L 137 31 Q 133 36 128 47 L 123 97 Q 121 106 117 116 L 112 135" stroke-width="2"/>
+    
+    <!-- Inner (thinnest) -->
+    <path d="M 150 29 Q 144 23 144 29 L 139 32 Q 136 37 131 49 L 126 99 Q 124 107 119 117 L 114 135" stroke-width="1.5"/>
+    
+    <!-- Stem - thick vertical line -->
+    <line x1="100" y1="135" x2="100" y2="175" stroke-width="5"/>
+    
+    <!-- Bottom serifs -->
+    <!-- Left serif (inward-curving) -->
+    <path d="M 100 175 Q 95 180 90 175" stroke-width="2"/>
+    
+    <!-- Right serif (outward-curving, more pronounced) -->
+    <path d="M 100 175 Q 108 182 115 175" stroke-width="3"/>
+  </g>
+  
+  <!-- Additional white outline for the main black shape -->
+  <path d="M 40 25 Q 50 15 60 25 L 65 30 Q 70 35 75 45 L 80 95 Q 82 105 85 115 L 90 135 L 100 175 Q 95 180 90 175 L 85 115 Q 82 105 80 95 L 75 45 Q 70 35 65 30 L 60 25 Q 50 15 40 25 Z" 
+        fill="none" 
+        stroke="#FFFFFF" 
+        stroke-width="2.5" 
+        stroke-linejoin="round" 
+        stroke-linecap="round"/>
+</svg>

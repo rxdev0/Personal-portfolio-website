@@ -1,73 +1,125 @@
 'use client';
 
-import { motion, useSpring, useMotionValue } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import { motion, useSpring } from 'framer-motion';
 
 export function MouseFollower() {
-    const cursorX = useMotionValue(-100);
-    const cursorY = useMotionValue(-100);
-    const [isHoveringText, setIsHoveringText] = useState(false);
-    const [enabled, setEnabled] = useState(true);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [inXrayZone, setInXrayZone] = useState(false);
 
-    // Soft spring for trailing effect - flows behind cursor, catches up when static
-    const springConfig = { damping: 20, stiffness: 150, mass: 0.5 };
-    const cursorXSpring = useSpring(cursorX, springConfig);
-    const cursorYSpring = useSpring(cursorY, springConfig);
+  // Check if device is mobile (touch device)
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(
+        window.matchMedia('(max-width: 768px)').matches ||
+        'ontouchstart' in window
+      );
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
-    // Disable on touch devices and small screens
-    useEffect(() => {
-        const isTouch = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
-        if (isTouch || (typeof window !== 'undefined' && window.innerWidth < 640)) {
-            setEnabled(false);
-            return;
-        }
+  // Fluid spring animation for cursor following
+  const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
+  const cursorX = useSpring(0, springConfig);
+  const cursorY = useSpring(0, springConfig);
 
-        const handleResize = () => {
-            if (window.innerWidth < 640) setEnabled(false);
-            else setEnabled(true);
-        };
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+      if (!isVisible) setIsVisible(true);
+    },
+    [isVisible, cursorX, cursorY]
+  );
 
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+  const handleMouseEnter = useCallback(() => setIsVisible(true), []);
+  const handleMouseLeave = useCallback(() => setIsVisible(false), []);
 
-    useEffect(() => {
-        if (!enabled) return;
+  const handleMouseOver = useCallback((e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    const inZone = !!target.closest('.cursor-xray-zone');
+    setInXrayZone(inZone);
+  }, []);
 
-        const moveCursor = (e: MouseEvent) => {
-            cursorX.set(e.clientX - 16);
-            cursorY.set(e.clientY - 16);
-        };
+  useEffect(() => {
+    // Don't attach mouse listeners on mobile
+    if (isMobile) return;
 
-        const handleMouseOver = (e: MouseEvent) => {
-            const target = e.target as HTMLElement;
-            // Check if hovering over text-heavy elements or interactive elements
-            if (['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'A', 'BUTTON', 'LI'].includes(target.tagName) || target.closest('a') || target.closest('button')) {
-                setIsHoveringText(true);
-            } else {
-                setIsHoveringText(false);
-            }
-        };
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseenter', handleMouseEnter);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('mouseover', handleMouseOver);
 
-        window.addEventListener('mousemove', moveCursor);
-        window.addEventListener('mouseover', handleMouseOver);
+    // Track hovering on interactive elements
+    const handleElementHover = () => {
+      const interactiveElements = document.querySelectorAll(
+        'a, button, input, textarea, [role="button"], .cursor-hover'
+      );
 
-        return () => {
-            window.removeEventListener('mousemove', moveCursor);
-            window.removeEventListener('mouseover', handleMouseOver);
-        };
-    }, [cursorX, cursorY, enabled]);
+      interactiveElements.forEach((el) => {
+        el.addEventListener('mouseenter', () => setIsHovering(true));
+        el.addEventListener('mouseleave', () => setIsHovering(false));
+      });
+    };
 
-    if (!enabled) return null;
+    handleElementHover();
+    const observer = new MutationObserver(handleElementHover);
+    observer.observe(document.body, { childList: true, subtree: true });
 
-    return (
-        <motion.div
-            style={{
-                x: cursorXSpring,
-                y: cursorYSpring,
-            }}
-            className={`fixed top-0 left-0 w-8 h-8 rounded-full border border-accent pointer-events-none z-9999 transition-[backdrop-filter] duration-200 ${isHoveringText ? 'backdrop-blur-[1px]' : 'backdrop-blur-sm'
-                }`}
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseenter', handleMouseEnter);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mouseover', handleMouseOver);
+      observer.disconnect();
+    };
+  }, [handleMouseMove, handleMouseEnter, handleMouseLeave, handleMouseOver, isMobile]);
+
+  // Don't render custom cursor on mobile devices
+  if (isMobile || !isVisible) return null;
+
+  const blendMode = inXrayZone ? 'difference' : 'normal';
+
+  return (
+    <>
+      {/* Main cursor circle - follows with fluid delay */}
+      <motion.div
+        className="fixed pointer-events-none z-[99999]"
+        style={{
+          x: cursorX,
+          y: cursorY,
+          translateX: '-50%',
+          translateY: '-50%',
+          mixBlendMode: blendMode,
+        }}
+      >
+        <div
+          className={`rounded-full border-2 border-[#7b2cbf] transition-all duration-200 ${
+            isHovering ? 'w-12 h-12' : 'w-10 h-10'
+          }`}
+          style={{
+            boxShadow: isHovering
+              ? '0 0 25px rgba(123, 44, 191, 0.5), inset 0 0 15px rgba(123, 44, 191, 0.15)'
+              : '0 0 20px rgba(123, 44, 191, 0.4), inset 0 0 10px rgba(123, 44, 191, 0.1)',
+          }}
         />
-    );
+      </motion.div>
+
+      {/* Inner dot - follows cursor exactly, always visible */}
+      <div
+        className="fixed pointer-events-none z-[99999] w-1 h-1 rounded-full bg-[#7b2cbf]"
+        style={{
+          left: position.x,
+          top: position.y,
+          transform: 'translate(-50%, -50%)',
+        }}
+      />
+    </>
+  );
 }

@@ -21,10 +21,10 @@ export default function Home() {
     <main className="min-h-screen bg-background text-foreground relative selection:bg-accent/20 selection:text-accent">
       <Navbar isCorporate={isCorporate} />
       <HeroSplit isCorporate={isCorporate} toggleCorporate={toggleCorporate} />
-      <FluxCaseStudy />
+      <FluxCaseStudy isCorporate={isCorporate} />
 
       <About />
-      <TechStack />
+      <TechStack isCorporate={isCorporate} />
       <Experience />
       <Contact isCorporate={isCorporate} />
 

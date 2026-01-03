@@ -86,7 +86,7 @@ export function Contact({ isCorporate }: { isCorporate?: boolean }) {
                 {isCorporate ? (
                     <>
                         <div className="flex flex-col md:flex-row md:items-center gap-0 md:gap-2">
-                            <span className="block md:inline">© 2012-2025 • Available</span>
+                            <span className="block md:inline">© 2012-2026 • Available</span>
                             <span className="block md:inline">for enterprise projects</span>
                         </div>
                         <div className="ml-auto text-right pointer-events-auto max-w-xs md:max-w-none">
@@ -96,7 +96,7 @@ export function Contact({ isCorporate }: { isCorporate?: boolean }) {
                     </>
                 ) : (
                     <>
-                        <p>I don't care about &copy; 2012-2025</p>
+                        <p>I don't care about &copy; 2012-2026</p>
                         <p>Privacy policy, Cache & shit</p>
                     </>
                 )}
@@ -106,13 +106,44 @@ export function Contact({ isCorporate }: { isCorporate?: boolean }) {
             <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: showToast ? 1 : 0, y: showToast ? 0 : 50 }}
-                className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 px-6 py-3 bg-white text-black rounded-full shadow-2xl flex items-center gap-3 font-medium pointer-events-none"
+                className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 px-6 py-3 bg-white text-black rounded-full shadow-2xl flex items-center gap-3 font-medium pointer-events-none overflow-visible"
             >
-                <div className="p-1 bg-green-500 rounded-full text-white">
+                {/* Localized Confetti */}
+                {showToast && <ConfettiParticles />}
+
+                <div className="p-1 bg-green-500 rounded-full text-white relative z-10">
                     <Copy className="w-3 h-3" />
                 </div>
-                Email's Copied, hit me up
+                <span className="relative z-10">Email's Copied, hit me up</span>
             </motion.div>
         </section>
+    );
+}
+
+function ConfettiParticles() {
+    // Generate fixed particles for consistent effect
+    const particles = Array.from({ length: 20 });
+
+    return (
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+            {particles.map((_, i) => (
+                <motion.div
+                    key={i}
+                    initial={{ x: 0, y: 0, opacity: 1, scale: 0.5 }}
+                    animate={{
+                        x: (Math.random() - 0.5) * 400, // Wider horizontal spread
+                        y: (Math.random() - 1) * 300,   // Higher vertical spread
+                        opacity: 0,
+                        scale: 0,
+                        rotate: Math.random() * 360
+                    }}
+                    transition={{ duration: 1, ease: "easeOut" }} // Slightly slower for visibility
+                    className={`absolute rounded-full ${Math.random() > 0.5 ? 'w-3 h-3' : 'w-2 h-2'}`} // Mix of sizes
+                    style={{
+                        backgroundColor: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#7b2cbf'][Math.floor(Math.random() * 6)]
+                    }}
+                />
+            ))}
+        </div>
     );
 }

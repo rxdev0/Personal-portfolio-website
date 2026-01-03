@@ -73,10 +73,10 @@ export function Navbar({ isCorporate }: { isCorporate?: boolean }) {
         if (!el) return false;
 
         const nav = document.querySelector('nav');
-        const navbarHeight = nav ? Math.ceil(nav.getBoundingClientRect().height) + 8 : 80;
-        const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
+        // Scroll to the exact top of the element + a tiny nudge to handle sub-pixel rendering/parallax gaps
+        const top = el.getBoundingClientRect().top + window.scrollY + 5;
 
-        logNav('scrollToHashWithOffset', { href, attempt, top, navbarHeight });
+        logNav('scrollToHashWithOffset', { href, attempt, top });
         window.scrollTo({ top, behavior: smooth ? 'smooth' : 'auto' });
 
         // After scrolling, verify element is visible; if not, retry a few times
@@ -193,7 +193,13 @@ export function Navbar({ isCorporate }: { isCorporate?: boolean }) {
             <div className="pointer-events-auto">
                 {/* Desktop CTA */}
                 <div className="hidden md:block">
-                    <button className="bg-accent hover:bg-accent/80 text-white text-sm font-medium px-6 py-3 rounded-full transition-colors shadow-lg shadow-accent/20">
+                    <button
+                        onClick={() => {
+                            navigator.clipboard.writeText('yayinkuthiala.in@gmail.com');
+                            triggerContactToast();
+                        }}
+                        className="bg-accent hover:bg-accent/80 text-white text-sm font-medium px-6 py-3 rounded-full transition-colors shadow-lg shadow-accent/20"
+                    >
                         {isCorporate ? "Let's talk $" : "Let's talk shit"}
                     </button>
                 </div>
